@@ -10,9 +10,9 @@
 ## 📋 LISTA DE TAREFAS (Pegar Conforme Disponibilidade)
 
 ### 🚀 **FASE 1 - Fundação (Sem Dependências)**
-- [ ] **T1** - Setup projeto React + TypeScript
-- [ ] **T2** - Criar arquivo questions.json (30+ perguntas)
-- [ ] **T3** - Criar tipos TypeScript (Question, GameState, etc)
+- [x] **T1** - Setup projeto React + TypeScript + Vite ✅
+- [x] **T2** - Criar arquivo questions.json (35 perguntas organizadas por nível) ✅
+- [x] **T3** - Criar tipos TypeScript (Question, GameState, HelpType, etc) ✅
 
 ### 🔗 **FASE 2 - Core (Dependências: T1, T3)**
 - [ ] **T4** - Hook useGameState (gerenciar estado do jogo)
@@ -185,9 +185,9 @@ export const useGameState = () => {
 
 ### **📋 Status das Tarefas**
 Marcar como feito conforme completam:
-- [x] T1 - Setup projeto ✅
-- [ ] T2 - questions.json 🔄 (em andamento)
-- [ ] T3 - Tipos ⏳ (aguardando)
+- [x] T1 - Setup projeto React + TypeScript + Vite ✅
+- [x] T2 - questions.json (35 perguntas organizadas por nível) ✅
+- [x] T3 - Tipos TypeScript (interfaces completas) ✅
 
 ---
 
