@@ -1,0 +1,38 @@
+{
+  "gameTitle": "Game Title",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Question",
+      "options": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "id": 2,
+      "question": "Question 2",
+      "options": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "id": 3,
+      "question": "Question 3",
+      "options": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4"
+      ],
+      "correctAnswer": 2
+    }
+  ]
+}
