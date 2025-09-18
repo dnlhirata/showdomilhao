@@ -1,0 +1,250 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual é a capital do Brasil?",
+      "options": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+      "correct": 2,
+      "level": "easy"
+    },
+    {
+      "id": 2,
+      "question": "Quantos dias tem um ano bissexto?",
+      "options": ["365", "366", "364", "367"],
+      "correct": 1,
+      "level": "easy"
+    },
+    {
+      "id": 3,
+      "question": "Qual animal é conhecido como 'rei da selva'?",
+      "options": ["Tigre", "Elefante", "Leão", "Leopardo"],
+      "correct": 2,
+      "level": "easy"
+    },
+    {
+      "id": 4,
+      "question": "Em que continente fica o Egito?",
+      "options": ["Ásia", "África", "Europa", "América"],
+      "correct": 1,
+      "level": "easy"
+    },
+    {
+      "id": 5,
+      "question": "Quantos lados tem um triângulo?",
+      "options": ["2", "3", "4", "5"],
+      "correct": 1,
+      "level": "easy"
+    },
+    {
+      "id": 6,
+      "question": "Qual é o maior planeta do sistema solar?",
+      "options": ["Terra", "Saturno", "Júpiter", "Netuno"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 7,
+      "question": "Em que ano o homem pisou na Lua pela primeira vez?",
+      "options": ["1967", "1969", "1971", "1973"],
+      "correct": 1,
+      "level": "medium"
+    },
+    {
+      "id": 8,
+      "question": "Qual é a fórmula química da água?",
+      "options": ["CO2", "H2O", "O2", "NaCl"],
+      "correct": 1,
+      "level": "medium"
+    },
+    {
+      "id": 9,
+      "question": "Quem pintou a obra 'Mona Lisa'?",
+      "options": ["Van Gogh", "Picasso", "Leonardo da Vinci", "Michelangelo"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 10,
+      "question": "Qual é a moeda oficial do Japão?",
+      "options": ["Yuan", "Won", "Yen", "Dong"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 11,
+      "question": "Em que guerra foi usada a primeira bomba atômica?",
+      "options": ["Primeira Guerra Mundial", "Guerra do Vietnã", "Segunda Guerra Mundial", "Guerra da Coreia"],
+      "correct": 2,
+      "level": "hard"
+    },
+    {
+      "id": 12,
+      "question": "Qual é o elemento químico com símbolo 'Au'?",
+      "options": ["Prata", "Ouro", "Alumínio", "Arsênio"],
+      "correct": 1,
+      "level": "hard"
+    },
+    {
+      "id": 13,
+      "question": "Quantos ossos tem o corpo humano adulto?",
+      "options": ["206", "208", "204", "210"],
+      "correct": 0,
+      "level": "hard"
+    },
+    {
+      "id": 14,
+      "question": "Qual país tem a maior população do mundo?",
+      "options": ["Índia", "Estados Unidos", "China", "Indonésia"],
+      "correct": 2,
+      "level": "hard"
+    },
+    {
+      "id": 15,
+      "question": "Em que ano foi proclamada a República no Brasil?",
+      "options": ["1888", "1889", "1890", "1891"],
+      "correct": 1,
+      "level": "hard"
+    },
+    {
+      "id": 16,
+      "question": "Qual é a velocidade da luz no vácuo?",
+      "options": ["300.000 km/s", "299.792.458 m/s", "150.000 km/s", "250.000 km/s"],
+      "correct": 1,
+      "level": "hard"
+    },
+    {
+      "id": 17,
+      "question": "Quem escreveu 'Dom Casmurro'?",
+      "options": ["José de Alencar", "Machado de Assis", "Clarice Lispector", "Guimarães Rosa"],
+      "correct": 1,
+      "level": "medium"
+    },
+    {
+      "id": 18,
+      "question": "Qual é o menor país do mundo?",
+      "options": ["Mônaco", "San Marino", "Vaticano", "Liechtenstein"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 19,
+      "question": "Em que oceano fica a Ilha de Madagascar?",
+      "options": ["Atlântico", "Pacífico", "Índico", "Ártico"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 20,
+      "question": "Quantas cordas tem um violão tradicional?",
+      "options": ["4", "5", "6", "7"],
+      "correct": 2,
+      "level": "easy"
+    },
+    {
+      "id": 21,
+      "question": "Qual é a capital da Austrália?",
+      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 22,
+      "question": "Em que ano começou a Segunda Guerra Mundial?",
+      "options": ["1938", "1939", "1940", "1941"],
+      "correct": 1,
+      "level": "medium"
+    },
+    {
+      "id": 23,
+      "question": "Qual é o nome do processo pelo qual as plantas produzem seu próprio alimento?",
+      "options": ["Respiração", "Transpiração", "Fotossíntese", "Digestão"],
+      "correct": 2,
+      "level": "easy"
+    },
+    {
+      "id": 24,
+      "question": "Quantos minutos tem uma hora?",
+      "options": ["50", "60", "70", "80"],
+      "correct": 1,
+      "level": "easy"
+    },
+    {
+      "id": 25,
+      "question": "Qual é o maior mamífero do mundo?",
+      "options": ["Elefante", "Baleia Azul", "Girafa", "Rinoceronte"],
+      "correct": 1,
+      "level": "easy"
+    },
+    {
+      "id": 26,
+      "question": "Em que cidade fica a estátua da Liberdade?",
+      "options": ["Boston", "Philadelphia", "Nova York", "Washington"],
+      "correct": 2,
+      "level": "medium"
+    },
+    {
+      "id": 27,
+      "question": "Qual é a montanha mais alta do mundo?",
+      "options": ["K2", "Monte Everest", "Kilimanjaro", "Monte McKinley"],
+      "correct": 1,
+      "level": "medium"
+    },
+    {
+      "id": 28,
+      "question": "Quantos estados tem o Brasil?",
+      "options": ["25", "26", "27", "28"],
+      "correct": 1,
+      "level": "easy"
+    },
+    {
+      "id": 29,
+      "question": "Qual cientista desenvolveu a teoria da relatividade?",
+      "options": ["Isaac Newton", "Albert Einstein", "Galileu Galilei", "Stephen Hawking"],
+      "correct": 1,
+      "level": "hard"
+    },
+    {
+      "id": 30,
+      "question": "Em que ano foi fundada a cidade de São Paulo?",
+      "options": ["1532", "1554", "1565", "1575"],
+      "correct": 1,
+      "level": "hard"
+    },
+    {
+      "id": 31,
+      "question": "Qual é o nome do satélite natural da Terra?",
+      "options": ["Lua", "Sol", "Marte", "Vênus"],
+      "correct": 0,
+      "level": "easy"
+    },
+    {
+      "id": 32,
+      "question": "Quantas casas decimais tem o número Pi (π) aproximadamente usado em cálculos básicos?",
+      "options": ["1", "2", "3", "4"],
+      "correct": 1,
+      "level": "medium"
+    },
+    {
+      "id": 33,
+      "question": "Qual é o nome do primeiro presidente do Brasil?",
+      "options": ["Getúlio Vargas", "Juscelino Kubitschek", "Deodoro da Fonseca", "Floriano Peixoto"],
+      "correct": 2,
+      "level": "hard"
+    },
+    {
+      "id": 34,
+      "question": "Em que esporte se usa uma raquete?",
+      "options": ["Futebol", "Basquete", "Tênis", "Natação"],
+      "correct": 2,
+      "level": "easy"
+    },
+    {
+      "id": 35,
+      "question": "Qual é a língua oficial do Brasil?",
+      "options": ["Espanhol", "Inglês", "Português", "Francês"],
+      "correct": 2,
+      "level": "easy"
+    }
+  ],
+  "prizes": [1000, 2000, 5000, 10000, 20000, 50000, 100000, 300000, 500000, 1000000]
+}
