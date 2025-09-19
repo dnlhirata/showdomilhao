@@ -10,6 +10,7 @@ interface QuestionCardProps {
   selectedOption?: number;
   showResult?: boolean;
   isCorrect?: boolean;
+  isAnimating?: boolean;
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = ({
@@ -20,6 +21,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   selectedOption,
   showResult = false,
   isCorrect,
+  isAnimating = false,
 }) => {
   const handleOptionClick = (optionIndex: number) => {
     if (disabled || hiddenOptions.includes(optionIndex)) {
@@ -38,6 +40,10 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
     if (selectedOption === optionIndex) {
       classes.push("option-selected");
+
+      if (isAnimating) {
+        classes.push("option-animating");
+      }
     }
 
     if (showResult) {

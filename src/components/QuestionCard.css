@@ -127,6 +127,58 @@
   box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
 }
 
+.option-animating {
+  animation: optionBlink 1.5s ease-in-out;
+}
+
+@keyframes optionBlink {
+  0% {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px) scale(1);
+  }
+  12.5% {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+    transform: translateY(-4px) scale(1.02);
+  }
+  25% {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px) scale(1);
+  }
+  37.5% {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+    transform: translateY(-4px) scale(1.02);
+  }
+  50% {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px) scale(1);
+  }
+  62.5% {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+    transform: translateY(-4px) scale(1.02);
+  }
+  75% {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px) scale(1);
+  }
+  87.5% {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+    transform: translateY(-4px) scale(1.02);
+  }
+  100% {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px) scale(1);
+  }
+}
+
 .question-option.option-correct {
   background: linear-gradient(135deg, #27ae60, #229954) !important;
   border-color: #27ae60 !important;
@@ -256,7 +308,8 @@
   .question-option,
   .question-card::before,
   .question-option.option-correct,
-  .question-option.option-incorrect {
+  .question-option.option-incorrect,
+  .option-animating {
     animation: none;
     transition: none;
   }

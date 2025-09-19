@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import CardSelection from "./components/CardSelection";
 import { PrizeTracker } from "./components/PrizeTracker";
@@ -23,20 +23,44 @@ function App() {
   const [showResult, setShowResult] = useState(false);
   const [showCardSelection, setShowCardSelection] = useState(false);
   const [showNoiaHelp, setShowNoiaHelp] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Preload audio for better performance
+  useEffect(() => {
+    const audio = new Audio("/certa-resposta-show-do-milhao.mp3");
+    audio.preload = "auto";
+    audio.volume = 0.5;
+  }, []);
 
   // Handle answer selection with visual feedback
   const handleAnswer = (optionIndex: number) => {
     if (gameState.gameOver || showResult) return;
 
+    // Start animation immediately for instant feedback
     setSelectedOption(optionIndex);
-    setShowResult(true);
+    setIsAnimating(true);
+
+    // Check if answer is correct and play sound
+    const isCorrect =
+      gameState.currentQuestion &&
+      optionIndex === gameState.currentQuestion.correct;
+    if (isCorrect) {
+      // Play sound immediately when correct answer is selected
+      playCorrectAnswerSound();
+    }
+
+    // After 1.5s, stop animation and show final result
+    setTimeout(() => {
+      setIsAnimating(false);
+      setShowResult(true);
+    }, 1500);
 
     // Show result for 2 seconds before progressing
     setTimeout(() => {
       answerQuestion(optionIndex);
       setSelectedOption(null);
       setShowResult(false);
-    }, 2000);
+    }, 3500); // Increased to 3.5s to account for longer animation
   };
 
   // Handle skip with UI cleanup
@@ -44,6 +68,7 @@ function App() {
     skipQuestion();
     setSelectedOption(null);
     setShowResult(false);
+    setIsAnimating(false);
   };
 
   // Handle university help - shows percentage bars
@@ -85,6 +110,7 @@ function App() {
     resetGame();
     setSelectedOption(null);
     setShowResult(false);
+    setIsAnimating(false);
     setShowCardSelection(false);
     setShowNoiaHelp(false);
   };
@@ -94,6 +120,19 @@ function App() {
       style: "currency",
       currency: "BRL",
     }).format(prize);
+  };
+
+  // Play correct answer sound
+  const playCorrectAnswerSound = () => {
+    try {
+      const audio = new Audio("/certa-resposta-show-do-milhao.mp3");
+      audio.volume = 0.5; // Set volume to 50%
+      audio.play().catch((error) => {
+        console.log("Audio playback failed:", error);
+      });
+    } catch (error) {
+      console.log("Audio creation failed:", error);
+    }
   };
 
   // Game Over Screen
@@ -146,7 +185,7 @@ function App() {
             question={gameState.currentQuestion}
             onAnswer={handleAnswer}
             hiddenOptions={gameState.hiddenOptions}
-            disabled={showResult}
+            disabled={showResult || isAnimating}
             selectedOption={
               selectedOption !== null ? selectedOption : undefined
             }
@@ -155,6 +194,7 @@ function App() {
               selectedOption !== null &&
               selectedOption === gameState.currentQuestion.correct
             }
+            isAnimating={isAnimating}
           />
         </div>
 
