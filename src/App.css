@@ -1,42 +1,328 @@
-#root {
-  max-width: 1280px;
+/* App Container */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.game-header {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.game-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-info {
+  margin-top: 1rem;
+}
+
+.score-info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.score-info span {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+/* Main Game Area */
+.game-main {
+  max-width: 900px;
   margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Help Buttons */
+.help-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.help-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.help-btn:hover:not(.disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.skip-btn {
+  background: linear-gradient(45deg, #4ecdc4, #44a08d);
+}
+
+.university-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.card-btn {
+  background: linear-gradient(45deg, #f093fb, #f5576c);
+  padding: 0.6rem 1rem;
+  min-width: 50px;
+}
+
+.help-btn.disabled {
+  background: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.cards-help {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.help-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.help-label.disabled {
+  opacity: 0.5;
+}
+
+/* University Help Result */
+.university-help-result {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
+}
+
+.university-help-result h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ffd700;
+}
+
+.university-percentages {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.percentage-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.option-label {
+  font-weight: bold;
+  width: 30px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.bar-container {
+  flex: 1;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  border-radius: 12px;
+  transition: width 0.5s ease;
+}
+
+.percentage-value {
+  font-weight: bold;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Game Over Screen */
+.game-over-screen, .loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
   padding: 2rem;
+}
+
+.game-over-screen h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.final-score {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.final-score h2 {
+  color: #ffd700;
+  margin: 0 0 1rem 0;
+}
+
+.final-score h3 {
+  color: #4ecdc4;
+  margin: 0;
+}
+
+.play-again-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.play-again-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.loading-screen h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Demo Controls */
+.demo-controls {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.demo-controls h4 {
+  color: #ffd700;
+  margin-bottom: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.demo-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.demo-buttons button, .demo-btn {
+  background: linear-gradient(45deg, #333, #555);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.demo-buttons button:hover, .demo-btn:hover {
+  background: linear-gradient(45deg, #555, #777);
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-header h1 {
+    font-size: 2rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .score-info {
+    gap: 1rem;
+  }
+  
+  .score-info span {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .help-buttons {
+    gap: 0.5rem;
+  }
+  
+  .help-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .game-over-screen h1 {
+    font-size: 2rem;
+  }
+  
+  .final-score {
+    padding: 1.5rem;
+  }
+  
+  .demo-buttons {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .game-header h1 {
+    font-size: 1.5rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  
+  .score-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .help-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cards-help {
+    flex-direction: column;
+    text-align: center;
+  }
 }
