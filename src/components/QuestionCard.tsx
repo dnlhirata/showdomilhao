@@ -40,12 +40,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       classes.push("option-selected");
     }
 
-    if (showResult && selectedOption === optionIndex) {
-      classes.push(isCorrect ? "option-correct" : "option-incorrect");
-    }
-
-    if (showResult && optionIndex === question.correct) {
-      classes.push("option-correct");
+    if (showResult) {
+      if (selectedOption === optionIndex) {
+        // This is the option the user selected
+        classes.push(isCorrect ? "option-correct" : "option-incorrect");
+      } else if (optionIndex === question.correct && !isCorrect) {
+        // Show the correct answer only when user was wrong
+        classes.push("option-correct");
+      }
     }
 
     if (disabled) {
