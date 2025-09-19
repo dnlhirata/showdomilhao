@@ -55,10 +55,10 @@ export const useGameState = () => {
     
     if (isCorrect) {
       const nextIndex = gameState.currentQuestionIndex + 1;
-      const newScore = gameState.currentQuestionIndex + 1;
+      const newScore = gameState.score + 1; // Incrementa apenas quando acerta
       
-      // Verifica se ganhou o jogo (respondeu todas as perguntas)
-      if (nextIndex >= questions.length) {
+      // Verifica se ganhou o jogo (respondeu corretamente 10 perguntas)
+      if (newScore >= prizes.length) {
         setGameState(prev => ({
           ...prev,
           score: newScore,
@@ -85,7 +85,7 @@ export const useGameState = () => {
         currentQuestion: null
       }));
     }
-  }, [gameState.gameOver, gameState.currentQuestion, gameState.currentQuestionIndex, questions]);
+  }, [gameState.gameOver, gameState.currentQuestion, gameState.currentQuestionIndex, gameState.score, questions, prizes.length]);
 
   /**
    * Pula a pergunta atual (máximo 3 vezes)

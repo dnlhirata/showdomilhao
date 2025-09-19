@@ -31,7 +31,7 @@
   - **Depende de**: T4, T5, T6, T7
 
 ### 🆘 **FASE 4 - Ajudas (Dependências: T9)**
-- [ ] **T10** - Funcionalidade "Pular" (máx 3x)
+- [x] **T10** - Funcionalidade "Pular" (máx 3x) ✅
   - **Depende de**: T9 (integração básica)
 - [ ] **T11** - Sistema "Ajuda Universitários" (% por alternativa)
   - **Depende de**: T9 (integração básica)
@@ -194,6 +194,7 @@ Marcar como feito conforme completam:
 - [x] T7 - Lógica de validação de respostas (utilitários completos) ✅
 - [x] T8 - Componente PrizeTracker (escada visual completa) ✅
 - [x] T9 - Integração componentes + hook (jogo funcional completo) ✅
+- [x] T10 - Funcionalidade "Pular" (componente visual + lógica) ✅
 
 ---
 
