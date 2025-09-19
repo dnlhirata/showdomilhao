@@ -1,4 +1,4 @@
-import { Question, GameState } from '../types';
+import type { Question, GameState } from '../types';
 
 /**
  * Resultado da validação de uma resposta
