@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import CardSelection from "./components/CardSelection";
+import IntroSlideshow from "./components/IntroSlideshow";
 import { PrizeTracker } from "./components/PrizeTracker";
 import QuestionCard from "./components/QuestionCard";
 import { useGameState } from "./hooks/useGameState";
@@ -26,6 +27,7 @@ function App() {
   const [showCardSelection, setShowCardSelection] = useState(false);
   const [showNoiaHelp, setShowNoiaHelp] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
 
   // Preload audio for better performance
   useEffect(() => {
@@ -90,6 +92,11 @@ function App() {
     setShowWrongAnswerCard(false);
   };
 
+  // Handle intro completion
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
+
   // Handle cards help button click - show card selection
   const handleCardsHelpClick = () => {
     setShowCardSelection(true);
@@ -140,6 +147,11 @@ function App() {
       console.log("Audio creation failed:", error);
     }
   };
+
+  // Show intro slideshow first
+  if (showIntro) {
+    return <IntroSlideshow onComplete={handleIntroComplete} />;
+  }
 
   // Game Over Screen
   // if (gameState.gameOver) {
