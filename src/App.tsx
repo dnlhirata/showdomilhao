@@ -1,8 +1,12 @@
 import "./App.css";
-import QuestionCardExample from "./components/QuestionCardExample";
 
 function App() {
-  return <QuestionCardExample />;
+  return (
+    <div className="App">
+      <h1>Show do Milhão</h1>
+      <p>Em desenvolvimento...</p>
+    </div>
+  );
 }
 
 export default App;

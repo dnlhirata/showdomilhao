@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
-import { GameState, Question, HelpType, UniversityHelpResult, CardValue, QuestionsData } from '../types';
+import { useState, useCallback, useEffect, useMemo } from 'react';
+import type { GameState, Question, UniversityHelpResult, CardValue, QuestionsData } from '../types';
 import questionsData from '../questions/questions.json';
 
 /**
@@ -7,7 +7,7 @@ import questionsData from '../questions/questions.json';
  */
 export const useGameState = () => {
   // Estado inicial do jogo
-  const initialGameState: GameState = {
+  const initialGameState = useMemo<GameState>(() => ({
     currentQuestionIndex: 0,
     currentQuestion: null,
     score: 0,
@@ -17,7 +17,7 @@ export const useGameState = () => {
     gameOver: false,
     won: false,
     hiddenOptions: []
-  };
+  }), []);
 
   const [gameState, setGameState] = useState<GameState>(initialGameState);
   const [questions, setQuestions] = useState<Question[]>([]);
