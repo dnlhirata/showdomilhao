@@ -69,9 +69,6 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
   return (
     <div className="question-card">
-      <div className="question-header">
-        <div className="question-number">Pergunta #{question.id}</div>
-      </div>
 
       <div className="question-text">
         <h2>{question.question}</h2>

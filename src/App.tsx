@@ -174,11 +174,12 @@ function App() {
   // Main Game Screen
   return (
     <div className="app">
-      <header className="game-header">
-        <h1>Show do Milhão</h1>
-      </header>
-
       <main className="game-main">
+        {/* Logo */}
+        <div className="logo-container">
+          <img src="/showfritao.jpeg" alt="Show do Fritão" className="game-logo" />
+        </div>
+
         {/* Question Area */}
         <div className="question-area">
           <QuestionCard
@@ -198,16 +199,10 @@ function App() {
           />
         </div>
 
-        {/* Prize Tracker - Embaixo das perguntas */}
-        <PrizeTracker
-          prizes={prizes}
-          currentScore={gameState.score}
-          gameOver={gameState.gameOver}
-          won={gameState.won}
-        />
-
-        {/* Botões de Ajuda */}
-        <div className="help-buttons">
+        {/* Bottom Section - Botões e Prêmios */}
+        <div className="bottom-section">
+          {/* Botões de Ajuda */}
+          <div className="help-buttons">
           <button
             className={`help-btn skip-btn ${
               gameState.skipsLeft === 0 ? "disabled" : ""
@@ -237,6 +232,15 @@ function App() {
           >
             🃏 Cartas
           </button>
+          </div>
+
+          {/* Prize Tracker */}
+          <PrizeTracker
+            prizes={prizes}
+            currentScore={gameState.score}
+            gameOver={gameState.gameOver}
+            won={gameState.won}
+          />
         </div>
       </main>
 

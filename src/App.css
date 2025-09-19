@@ -1,17 +1,28 @@
 /* App Container */
 .app {
-  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-/* Header */
-.game-header {
+/* Logo Container */
+.logo-container {
   text-align: center;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  padding: 0.5rem 0.8rem;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
 .game-header h1 {
@@ -22,6 +33,22 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Game Logo */
+.game-logo {
+  height: 180px;
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 15px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.game-logo:hover {
+  transform: scale(1.02);
 }
 
 .game-info {
@@ -45,44 +72,60 @@
 
 /* Main Game Area */
 .game-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  max-width: 1600px;
+  width: 98%;
+  max-height: 98vh;
+  padding: 0.3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 120px);
-  justify-content: center;
+  justify-content: space-between;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Question Area */
 .question-area {
   width: 100%;
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bottom Section Container */
+.bottom-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  margin-top: 1rem;
 }
 
 /* Help Buttons */
 .help-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin: 0;
   flex-wrap: wrap;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .help-btn {
   background: linear-gradient(45deg, #ff6b6b, #ee5a52);
   border: none;
   color: white;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-size: 1.1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .help-btn:hover:not(.disabled) {
@@ -313,6 +356,11 @@
     font-size: 2rem;
   }
   
+  .game-logo {
+    height: 100px;
+    max-width: 400px;
+  }
+  
   .score-info {
     gap: 1rem;
   }
@@ -327,12 +375,13 @@
   }
   
   .help-buttons {
-    gap: 0.5rem;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
   }
   
   .help-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
   }
   
   .game-over-screen h1 {
@@ -360,6 +409,11 @@
 @media (max-width: 480px) {
   .game-header h1 {
     font-size: 1.5rem;
+  }
+  
+  .game-logo {
+    height: 90px;
+    max-width: 350px;
   }
   
   .score-info {
