@@ -16,6 +16,8 @@ function App() {
     useCardsHelp: triggerCardsHelp,
     resetGame,
     getCurrentPrize,
+    showWrongAnswerCard,
+    setShowWrongAnswerCard,
   } = useGameState();
 
   // UI state for answer feedback and help displays
@@ -84,6 +86,10 @@ function App() {
     setShowNoiaHelp(false);
   };
 
+  const handleCloseWrongAnswer = () => {
+    setShowWrongAnswerCard(false);
+  };
+
   // Handle cards help button click - show card selection
   const handleCardsHelpClick = () => {
     setShowCardSelection(true);
@@ -136,28 +142,28 @@ function App() {
   };
 
   // Game Over Screen
-  if (gameState.gameOver) {
-    return (
-      <div className="app">
-        <div className="game-over-screen">
-          <h1>
-            {gameState.won ? "🎉 PARABÉNS! VOCÊ GANHOU!" : "😢 GAME OVER"}
-          </h1>
-          <div className="final-score">
-            <h2>Pontuação Final: {gameState.score}/15</h2>
-            <h3>Prêmio: {formatPrize(getCurrentPrize())}</h3>
-            {gameState.won && (
-              <p>Você completou todas as perguntas e ganhou o prêmio máximo!</p>
-            )}
-            {!gameState.won && <p>Resposta incorreta! Tente novamente.</p>}
-          </div>
-          <button className="play-again-btn" onClick={handlePlayAgain}>
-            Jogar Novamente
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // if (gameState.gameOver) {
+  //   return (
+  //     <div className="app">
+  //       <div className="game-over-screen">
+  //         <h1>
+  //           {gameState.won ? "🎉 PARABÉNS! VOCÊ GANHOU!" : "😢 GAME OVER"}
+  //         </h1>
+  //         <div className="final-score">
+  //           <h2>Pontuação Final: {gameState.score}/15</h2>
+  //           <h3>Prêmio: {formatPrize(getCurrentPrize())}</h3>
+  //           {gameState.won && (
+  //             <p>Você completou todas as perguntas e ganhou o prêmio máximo!</p>
+  //           )}
+  //           {!gameState.won && <p>Resposta incorreta! Tente novamente.</p>}
+  //         </div>
+  //         <button className="play-again-btn" onClick={handlePlayAgain}>
+  //           Jogar Novamente
+  //         </button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   // Loading Screen (when no current question)
   if (!gameState.currentQuestion) {
@@ -177,7 +183,11 @@ function App() {
       <main className="game-main">
         {/* Logo */}
         <div className="logo-container">
-          <img src="/showfritao.jpeg" alt="Show do Fritão" className="game-logo" />
+          <img
+            src="/showfritao.jpeg"
+            alt="Show do Fritão"
+            className="game-logo"
+          />
         </div>
 
         {/* Question Area */}
@@ -203,35 +213,35 @@ function App() {
         <div className="bottom-section">
           {/* Botões de Ajuda */}
           <div className="help-buttons">
-          <button
-            className={`help-btn skip-btn ${
-              gameState.skipsLeft === 0 ? "disabled" : ""
-            }`}
-            onClick={handleSkip}
-            disabled={gameState.skipsLeft === 0 || showResult}
-          >
-            ⏭️ Pular ({gameState.skipsLeft})
-          </button>
+            <button
+              className={`help-btn skip-btn ${
+                gameState.skipsLeft === 0 ? "disabled" : ""
+              }`}
+              onClick={handleSkip}
+              disabled={gameState.skipsLeft === 0 || showResult}
+            >
+              ⏭️ Pular ({gameState.skipsLeft})
+            </button>
 
-          <button
-            className={`help-btn university-btn ${
-              gameState.universitiesUsed ? "disabled" : ""
-            }`}
-            onClick={handleUniversityHelp}
-            disabled={gameState.universitiesUsed || showResult}
-          >
-            Ajuda dos nóia
-          </button>
+            <button
+              className={`help-btn university-btn ${
+                gameState.universitiesUsed ? "disabled" : ""
+              }`}
+              onClick={handleUniversityHelp}
+              disabled={gameState.universitiesUsed || showResult}
+            >
+              Ajuda dos nóia
+            </button>
 
-          <button
-            className={`help-btn cards-btn ${
-              gameState.cardsUsed ? "disabled" : ""
-            }`}
-            onClick={handleCardsHelpClick}
-            disabled={gameState.cardsUsed || showResult}
-          >
-            🃏 Cartas
-          </button>
+            <button
+              className={`help-btn cards-btn ${
+                gameState.cardsUsed ? "disabled" : ""
+              }`}
+              onClick={handleCardsHelpClick}
+              disabled={gameState.cardsUsed || showResult}
+            >
+              🃏 Cartas
+            </button>
           </div>
 
           {/* Prize Tracker */}
@@ -261,6 +271,20 @@ function App() {
               <h2>Nóias, unam-se</h2>
               <img src="/noias.jpg" alt="Nóias" className="noias-image" />
               <button className="dismiss-btn" onClick={handleCloseNoiaHelp}>
+                Dispensar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Wrong answered */}
+      {showWrongAnswerCard && (
+        <div className="noia-help-overlay" onClick={handleCloseWrongAnswer}>
+          <div className="noia-help-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="noia-help-content">
+              <h2>SHOT SHOT SHOT</h2>
+              <button className="dismiss-btn" onClick={handleCloseWrongAnswer}>
                 Dispensar
               </button>
             </div>

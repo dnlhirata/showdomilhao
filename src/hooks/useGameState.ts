@@ -31,6 +31,7 @@ export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(initialGameState);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [prizes] = useState<number[]>((questionsData as QuestionsData).prizes);
+  const [showWrongAnswerCard, setShowWrongAnswerCard] = useState(false);
 
   // Carrega as perguntas e embaralha na inicialização
   useEffect(() => {
@@ -74,9 +75,9 @@ export const useGameState = () => {
       if (gameState.gameOver || !gameState.currentQuestion) return;
 
       const isCorrect = optionIndex === gameState.currentQuestion.correct;
+      const nextIndex = gameState.currentQuestionIndex + 1;
 
       if (isCorrect) {
-        const nextIndex = gameState.currentQuestionIndex + 1;
         const newScore = gameState.score + 1; // Incrementa apenas quando acerta
 
         // Verifica se ganhou o jogo (respondeu corretamente 10 perguntas)
@@ -101,10 +102,12 @@ export const useGameState = () => {
       } else {
         setGameState((prev) => ({
           ...prev,
-          gameOver: true,
+          gameOver: false,
           won: false,
-          currentQuestion: null,
+          currentQuestion: questions[nextIndex],
+          currentQuestionIndex: nextIndex,
         }));
+        setShowWrongAnswerCard(true);
       }
     },
     [
@@ -114,6 +117,7 @@ export const useGameState = () => {
       gameState.score,
       questions,
       prizes.length,
+      setShowWrongAnswerCard,
     ]
   );
 
@@ -304,6 +308,8 @@ export const useGameState = () => {
     gameState,
     questions,
     prizes,
+    showWrongAnswerCard,
+    setShowWrongAnswerCard,
 
     // Ações
     answerQuestion,
