@@ -10,6 +10,7 @@ function App() {
   // Real game state from useGameState hook
   const {
     gameState,
+    questions,
     prizes,
     answerQuestion,
     skipQuestion,

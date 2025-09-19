@@ -33,36 +33,21 @@ export const useGameState = () => {
   const [prizes] = useState<number[]>((questionsData as QuestionsData).prizes);
   const [showWrongAnswerCard, setShowWrongAnswerCard] = useState(false);
 
-  // Carrega as perguntas e embaralha na inicialização
+  // Carrega todas as perguntas em ordem aleatória
   useEffect(() => {
     const loadedQuestions = (questionsData as QuestionsData).questions;
-    // Embaralha as perguntas para cada jogo
+    // Embaralha todas as perguntas
     const shuffledQuestions = [...loadedQuestions].sort(
       () => Math.random() - 0.5
     );
-    // Pega apenas 15 perguntas para o jogo (5 fáceis, 5 médias, 5 difíceis)
-    const easyQuestions = shuffledQuestions
-      .filter((q) => q.level === "easy")
-      .slice(0, 5);
-    const mediumQuestions = shuffledQuestions
-      .filter((q) => q.level === "medium")
-      .slice(0, 5);
-    const hardQuestions = shuffledQuestions
-      .filter((q) => q.level === "hard")
-      .slice(0, 5);
 
-    const gameQuestions = [
-      ...easyQuestions,
-      ...mediumQuestions,
-      ...hardQuestions,
-    ];
-    setQuestions(gameQuestions);
+    setQuestions(shuffledQuestions);
 
     // Define a primeira pergunta
-    if (gameQuestions.length > 0) {
+    if (shuffledQuestions.length > 0) {
       setGameState((prev) => ({
         ...prev,
-        currentQuestion: gameQuestions[0],
+        currentQuestion: shuffledQuestions[0],
       }));
     }
   }, []);
@@ -247,33 +232,19 @@ export const useGameState = () => {
   const resetGame = useCallback(() => {
     setGameState(initialGameState);
 
-    // Reembaralha as perguntas
+    // Reembaralha todas as perguntas
     const loadedQuestions = (questionsData as QuestionsData).questions;
     const shuffledQuestions = [...loadedQuestions].sort(
       () => Math.random() - 0.5
     );
-    const easyQuestions = shuffledQuestions
-      .filter((q) => q.level === "easy")
-      .slice(0, 5);
-    const mediumQuestions = shuffledQuestions
-      .filter((q) => q.level === "medium")
-      .slice(0, 5);
-    const hardQuestions = shuffledQuestions
-      .filter((q) => q.level === "hard")
-      .slice(0, 5);
 
-    const gameQuestions = [
-      ...easyQuestions,
-      ...mediumQuestions,
-      ...hardQuestions,
-    ];
-    setQuestions(gameQuestions);
+    setQuestions(shuffledQuestions);
 
     // Define a primeira pergunta
-    if (gameQuestions.length > 0) {
+    if (shuffledQuestions.length > 0) {
       setGameState((prev) => ({
         ...prev,
-        currentQuestion: gameQuestions[0],
+        currentQuestion: shuffledQuestions[0],
       }));
     }
   }, [initialGameState]);
