@@ -9,7 +9,8 @@ interface PrizeTrackerProps {
 }
 
 /**
- * Componente que exibe a escada de prêmios do Show do Milhão
+ * Componente que exibe os prêmios no estilo Show do Milhão
+ * Mostra: Prêmio Garantido (esquerda) | Prêmio Atual (centro) | Próximo Prêmio (direita)
  */
 export const PrizeTracker: React.FC<PrizeTrackerProps> = ({
   prizes,
@@ -29,112 +30,106 @@ export const PrizeTracker: React.FC<PrizeTrackerProps> = ({
   };
 
   /**
-   * Determina a classe CSS para cada item da escada
+   * Calcula o prêmio garantido (que o jogador leva se errar)
    */
-  const getPrizeItemClass = (index: number): string => {
-    const baseClass = 'prize-item';
+  const getGuaranteedPrize = (): number => {
+    if (currentScore <= 0) return 0;
     
-    if (gameOver && won && index === currentScore - 1) {
-      return `${baseClass} prize-won`;
-    }
+    // Marcos de parada garantidos (no Show do Milhão real)
+    // 1ª pergunta = R$ 0 garantido
+    // 2ª-5ª pergunta = R$ 1.000 garantido  
+    // 6ª-10ª pergunta = R$ 50.000 garantido
+    // 11ª+ pergunta = R$ 500.000 garantido
     
-    if (gameOver && !won && index === currentScore - 1) {
-      return `${baseClass} prize-lost`;
-    }
-    
-    if (index === currentScore - 1) {
-      return `${baseClass} prize-current`;
-    }
-    
-    if (index < currentScore) {
-      return `${baseClass} prize-completed`;
-    }
-    
-    if (index === currentScore) {
-      return `${baseClass} prize-next`;
-    }
-    
-    return baseClass;
+    if (currentScore <= 1) return 0;
+    if (currentScore <= 5) return prizes[0]; // R$ 1.000
+    if (currentScore <= 10) return prizes[4]; // R$ 50.000
+    return prizes[8]; // R$ 500.000
   };
 
   /**
-   * Verifica se é um prêmio especial (marcos importantes)
+   * Obtém o prêmio atual
    */
-  const isSpecialPrize = (index: number): boolean => {
-    // Marcos especiais: 5ª pergunta (R$ 50.000), 10ª pergunta (R$ 500.000), 15ª pergunta (R$ 1.000.000)
-    return index === 4 || index === 9 || index === 14;
+  const getCurrentPrize = (): number => {
+    if (currentScore <= 0) return 0;
+    return prizes[currentScore - 1] || 0;
   };
 
+  /**
+   * Obtém o próximo prêmio
+   */
+  const getNextPrize = (): number => {
+    if (currentScore >= prizes.length) return prizes[prizes.length - 1];
+    return prizes[currentScore] || prizes[prizes.length - 1];
+  };
+
+  /**
+   * Determina o status do jogo para exibição
+   */
+  const getGameStatus = () => {
+    if (gameOver) {
+      if (won) {
+        return {
+          message: "PARABÉNS! VOCÊ É MILIONÁRIO!",
+          className: "status-won"
+        };
+      } else {
+        return {
+          message: `GAME OVER! Você levou ${formatPrize(getGuaranteedPrize())}`,
+          className: "status-lost"
+        };
+      }
+    }
+    
+    return {
+      message: `Pergunta ${currentScore + 1} de ${prizes.length}`,
+      className: "status-playing"
+    };
+  };
+
+  const guaranteedPrize = getGuaranteedPrize();
+  const currentPrize = getCurrentPrize();
+  const nextPrize = getNextPrize();
+  const status = getGameStatus();
+
   return (
-    <div className="prize-tracker">
-      <h3 className="prize-tracker-title">Escada de Prêmios</h3>
-      
-      <div className="prize-list">
-        {prizes.map((prize, index) => (
-          <div
-            key={index}
-            className={`${getPrizeItemClass(index)} ${isSpecialPrize(index) ? 'prize-special' : ''}`}
-          >
-            <div className="prize-number">
-              {index + 1}
-            </div>
-            
-            <div className="prize-value">
-              {formatPrize(prize)}
-            </div>
-            
-            <div className="prize-indicator">
-              {index === currentScore - 1 && !gameOver && '👤'}
-              {index === currentScore - 1 && gameOver && won && '🏆'}
-              {index === currentScore - 1 && gameOver && !won && '❌'}
-              {index < currentScore && '✓'}
-              {index === currentScore && !gameOver && '🎯'}
-              {isSpecialPrize(index) && index >= currentScore && '⭐'}
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Informações adicionais */}
-      <div className="prize-info">
-        <div className="current-prize">
-          <strong>Prêmio Atual:</strong>{' '}
-          {currentScore > 0 ? formatPrize(prizes[currentScore - 1]) : 'R$ 0'}
-        </div>
+    <div className="prize-tracker-show">
+      {/* Layout horizontal dos prêmios */}
+      <div className="prizes-display">
         
-        {!gameOver && currentScore < prizes.length && (
-          <div className="next-prize">
-            <strong>Próximo Prêmio:</strong>{' '}
-            {formatPrize(prizes[currentScore])}
+        {/* Prêmio Garantido (Esquerda) */}
+        <div className="prize-section guaranteed">
+          <div className="prize-label">GARANTIDO</div>
+          <div className="prize-value guaranteed-value">
+            {formatPrize(guaranteedPrize)}
           </div>
-        )}
-        
-        {gameOver && (
-          <div className={`final-result ${won ? 'result-won' : 'result-lost'}`}>
-            {won ? (
-              <>
-                🎉 <strong>PARABÉNS!</strong> Você ganhou {formatPrize(prizes[prizes.length - 1])}!
-              </>
-            ) : (
-              <>
-                😔 <strong>Game Over!</strong> Você levou {currentScore > 0 ? formatPrize(prizes[currentScore - 1]) : 'R$ 0'}
-              </>
-            )}
+          <div className="prize-description">
+            {guaranteedPrize === 0 ? "Nada garantido" : "Se errar"}
           </div>
-        )}
-      </div>
-      
-      {/* Marcos especiais */}
-      <div className="special-milestones">
-        <div className="milestone-info">
-          <span className="milestone-icon">⭐</span>
-          <span className="milestone-text">Marcos Especiais</span>
         </div>
-        <div className="milestone-list">
-          <div className="milestone">5ª pergunta: {formatPrize(prizes[4])}</div>
-          <div className="milestone">10ª pergunta: {formatPrize(prizes[9])}</div>
-          <div className="milestone">15ª pergunta: {formatPrize(prizes[14])}</div>
+
+        {/* Prêmio Atual (Centro) */}
+        <div className="prize-section current">
+          <div className="prize-label">ATUAL</div>
+          <div className="prize-value current-value">
+            {formatPrize(currentPrize)}
+          </div>
+          <div className="prize-description">
+            {gameOver && won ? "CONQUISTADO!" : gameOver ? "Perdido" : "Em jogo"}
+          </div>
         </div>
+
+        {/* Próximo Prêmio (Direita) */}
+        <div className="prize-section next">
+          <div className="prize-label">PRÓXIMO</div>
+          <div className="prize-value next-value">
+            {currentScore >= prizes.length ? "FIM" : formatPrize(nextPrize)}
+          </div>
+          <div className="prize-description">
+            {currentScore >= prizes.length ? "Completo" : "Objetivo"}
+          </div>
+        </div>
+
       </div>
     </div>
   );

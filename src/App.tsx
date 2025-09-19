@@ -137,40 +137,29 @@ function App() {
     <div className="app">
       <header className="game-header">
         <h1>Show do Milhão</h1>
-        <div className="game-info">
-          <div className="score-info">
-            <span>Pergunta: {gameState.currentQuestionIndex + 1}/15</span>
-            <span>Prêmio Atual: {formatPrize(getCurrentPrize())}</span>
-            <span>Próximo Prêmio: {formatPrize(getNextPrize())}</span>
-          </div>
-        </div>
       </header>
 
       <main className="game-main">
-        <div className="game-layout">
-          {/* Prize Tracker */}
-          <aside className="prize-sidebar">
-            <PrizeTracker
-              prizes={prizes}
-              currentScore={gameState.score}
-              gameOver={gameState.gameOver}
-              won={gameState.won}
-            />
-          </aside>
-
-          {/* Question Area */}
-          <div className="question-area">
-            <QuestionCard
-              question={gameState.currentQuestion}
-              onAnswer={handleAnswer}
-              hiddenOptions={gameState.hiddenOptions}
-              disabled={showResult}
-              selectedOption={selectedOption || undefined}
-              showResult={showResult}
-              isCorrect={selectedOption === gameState.currentQuestion.correct}
-            />
-          </div>
+        {/* Question Area */}
+        <div className="question-area">
+          <QuestionCard
+            question={gameState.currentQuestion}
+            onAnswer={handleAnswer}
+            hiddenOptions={gameState.hiddenOptions}
+            disabled={showResult}
+            selectedOption={selectedOption || undefined}
+            showResult={showResult}
+            isCorrect={selectedOption === gameState.currentQuestion.correct}
+          />
         </div>
+
+        {/* Prize Tracker - Embaixo das perguntas */}
+        <PrizeTracker
+          prizes={prizes}
+          currentScore={gameState.score}
+          gameOver={gameState.gameOver}
+          won={gameState.won}
+        />
 
         {/* Resultado da Ajuda dos Universitários */}
         {universityResult && (

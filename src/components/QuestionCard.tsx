@@ -62,11 +62,6 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   return (
     <div className="question-card">
       <div className="question-header">
-        <div className="question-level">
-          <span className={`level-badge level-${question.level}`}>
-            {question.level.toUpperCase()}
-          </span>
-        </div>
         <div className="question-number">Pergunta #{question.id}</div>
       </div>
 

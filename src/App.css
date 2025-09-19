@@ -48,24 +48,18 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  justify-content: center;
 }
 
-/* Game Layout with Prize Tracker */
-.game-layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.prize-sidebar {
-  position: sticky;
-  top: 1rem;
-  height: fit-content;
-}
-
+/* Question Area */
 .question-area {
-  min-width: 0; /* Prevent overflow */
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 /* Help Buttons */
@@ -285,18 +279,8 @@
     padding: 0.4rem 0.8rem;
   }
   
-  .game-layout {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .prize-sidebar {
-    position: static;
-    order: 2;
-  }
-  
   .question-area {
-    order: 1;
+    padding: 0 10px;
   }
   
   .help-buttons {
