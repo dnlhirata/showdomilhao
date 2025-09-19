@@ -30,7 +30,7 @@ export const useGameState = () => {
 
   const [gameState, setGameState] = useState<GameState>(initialGameState);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [prizes] = useState<number[]>((questionsData as QuestionsData).prizes);
+  const [prizes] = useState<string[]>((questionsData as QuestionsData).prizes);
   const [showWrongAnswerCard, setShowWrongAnswerCard] = useState(false);
 
   // Carrega todas as perguntas em ordem aleatória
@@ -244,8 +244,8 @@ export const useGameState = () => {
    * Obtém o prêmio atual baseado no score
    */
   const getCurrentPrize = useCallback(() => {
-    if (gameState.score === 0) return 0;
-    return prizes[gameState.score - 1] || 0;
+    if (gameState.score === 0) return "Nenhum prêmio ainda";
+    return prizes[gameState.score - 1] || "Nenhum prêmio";
   }, [gameState.score, prizes]);
 
   /**

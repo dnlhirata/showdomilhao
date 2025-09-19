@@ -8,7 +8,7 @@ export interface Question {
   question: string;
   options: string[];
   correct: number;
-  level: 'easy' | 'medium' | 'hard';
+  level: "easy" | "medium" | "hard";
 }
 
 /**
@@ -29,7 +29,7 @@ export interface GameState {
 /**
  * Tipos de ajuda disponíveis no jogo
  */
-export type HelpType = 'skip' | 'university' | 'cards';
+export type HelpType = "skip" | "university" | "cards";
 
 /**
  * Interface para o resultado da ajuda dos universitários
@@ -55,7 +55,7 @@ export interface QuestionsData {
 /**
  * Status possíveis de uma resposta
  */
-export type AnswerStatus = 'correct' | 'incorrect' | 'unanswered';
+export type AnswerStatus = "correct" | "incorrect" | "unanswered";
 
 /**
  * Interface para representar uma resposta dada pelo jogador

@@ -155,5 +155,41 @@
       "level": "medium"
     }
   ],
-  "prizes": ["Manda 1 Beber", 2000, 5000, 10000, 20000, 50000, 100000, 300000, 500000, 1000000]
+  "prizes": [
+    "Manda um beber",
+    "Manda um beber", 
+    "Manda um beber",
+    "Manda um beber",
+    "Manda dois beber",
+    "Manda dois beber",
+    "Manda dois beber",
+    "Manda dois beber",
+    "Manda dois beber",
+    "Manda dois beber",
+    "Manda três beber",
+    "Manda três beber",
+    "Manda três beber",
+    "Manda três beber",
+    "Manda três beber",
+    "Manda quatro beber",
+    "Manda quatro beber",
+    "Manda quatro beber",
+    "Manda quatro beber",
+    "Manda quatro beber",
+    "Manda cinco beber",
+    "Manda cinco beber",
+    "Manda cinco beber",
+    "Manda cinco beber",
+    "Manda cinco beber",
+    "Manda seis beber",
+    "Manda seis beber",
+    "Manda seis beber",
+    "Manda seis beber",
+    "Manda seis beber",
+    "Manda sete beber",
+    "Manda sete beber",
+    "Manda sete beber",
+    "Manda oito beber",
+    "Todos bebem!"
+  ]
 }
