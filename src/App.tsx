@@ -17,15 +17,15 @@ function App() {
     useCardsHelp: triggerCardsHelp,
     resetGame,
     getCurrentPrize,
-    getNextPrize,
   } = useGameState();
 
-  // UI state for answer feedback and university help display
-  const [universityResult, setUniversityResult] =
-    useState<UniversityHelpResult | null>(null);
+  // UI state for answer feedback and help displays
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const [universityResult, setUniversityResult] =
+    useState<UniversityHelpResult | null>(null);
   const [showCardSelection, setShowCardSelection] = useState(false);
+  const [showNoiaHelp, setShowNoiaHelp] = useState(false);
 
   // Handle answer selection with visual feedback
   const handleAnswer = (optionIndex: number) => {
@@ -46,17 +46,22 @@ function App() {
   // Handle skip with UI cleanup
   const handleSkip = () => {
     skipQuestion();
-    setUniversityResult(null);
     setSelectedOption(null);
     setShowResult(false);
+    setUniversityResult(null);
   };
 
-  // Handle university help
+  // Handle university help - shows percentage bars
   const handleUniversityHelp = () => {
     const result = triggerUniversityHelp();
     if (result) {
       setUniversityResult(result);
     }
+  };
+
+  // Handle closing nóia help modal
+  const handleCloseNoiaHelp = () => {
+    setShowNoiaHelp(false);
   };
 
   // Handle cards help button click - show card selection
@@ -83,10 +88,11 @@ function App() {
   // Handle play again with UI cleanup
   const handlePlayAgain = () => {
     resetGame();
-    setUniversityResult(null);
     setSelectedOption(null);
     setShowResult(false);
+    setUniversityResult(null);
     setShowCardSelection(false);
+    setShowNoiaHelp(false);
   };
 
   const formatPrize = (prize: number) => {
@@ -147,9 +153,14 @@ function App() {
             onAnswer={handleAnswer}
             hiddenOptions={gameState.hiddenOptions}
             disabled={showResult}
-            selectedOption={selectedOption || undefined}
+            selectedOption={
+              selectedOption !== null ? selectedOption : undefined
+            }
             showResult={showResult}
-            isCorrect={selectedOption === gameState.currentQuestion.correct}
+            isCorrect={
+              selectedOption !== null &&
+              selectedOption === gameState.currentQuestion.correct
+            }
           />
         </div>
 
@@ -225,6 +236,21 @@ function App() {
           onClose={handleCloseCardSelection}
           disabled={showResult}
         />
+      )}
+
+      {/* Nóia Help Modal */}
+      {showNoiaHelp && (
+        <div className="noia-help-overlay" onClick={handleCloseNoiaHelp}>
+          <div className="noia-help-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="noia-help-content">
+              <h2>Nóias, unam-se</h2>
+              <img src="/noias.jpg" alt="Nóias" className="noias-image" />
+              <button className="dismiss-btn" onClick={handleCloseNoiaHelp}>
+                Dispensar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
