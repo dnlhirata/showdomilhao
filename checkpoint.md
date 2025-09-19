@@ -35,7 +35,7 @@
   - **Depende de**: T9 (integração básica)
 - [ ] **T11** - Sistema "Ajuda Universitários" (% por alternativa)
   - **Depende de**: T9 (integração básica)
-- [ ] **T12** - Sistema "Cartas" (eliminar 1, 2 ou 3 alternativas)
+- [x] **T12** - Sistema "Cartas" (eliminar 1, 2 ou 3 alternativas) ✅
   - **Depende de**: T9 (integração básica)
 
 ### 🎨 **FASE 5 - Interface (Dependências: T10, T11, T12)**
@@ -195,6 +195,7 @@ Marcar como feito conforme completam:
 - [x] T8 - Componente PrizeTracker (escada visual completa) ✅
 - [x] T9 - Integração componentes + hook (jogo funcional completo) ✅
 - [x] T10 - Funcionalidade "Pular" (componente visual + lógica) ✅
+- [x] T12 - Sistema "Cartas" com seleção interativa (1,2,3,J) ✅
 
 ---
 

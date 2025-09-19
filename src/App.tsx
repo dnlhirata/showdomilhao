@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import CardSelection from "./components/CardSelection";
 import { PrizeTracker } from "./components/PrizeTracker";
 import QuestionCard from "./components/QuestionCard";
 import { useGameState } from "./hooks/useGameState";
@@ -24,6 +25,7 @@ function App() {
     useState<UniversityHelpResult | null>(null);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const [showCardSelection, setShowCardSelection] = useState(false);
 
   // Handle answer selection with visual feedback
   const handleAnswer = (optionIndex: number) => {
@@ -57,9 +59,25 @@ function App() {
     }
   };
 
-  // Handle cards help
-  const handleCardsHelp = (cardValue: 1 | 2 | 3) => {
-    triggerCardsHelp(cardValue);
+  // Handle cards help button click - show card selection
+  const handleCardsHelpClick = () => {
+    setShowCardSelection(true);
+  };
+
+  // Handle card selection from the modal
+  const handleCardSelect = (cardValue: number) => {
+    if (cardValue > 0) {
+      triggerCardsHelp(cardValue as 1 | 2 | 3);
+    }
+    // Close the modal after selection
+    setTimeout(() => {
+      setShowCardSelection(false);
+    }, 1000);
+  };
+
+  // Handle closing card selection modal
+  const handleCloseCardSelection = () => {
+    setShowCardSelection(false);
   };
 
   // Handle play again with UI cleanup
@@ -68,6 +86,7 @@ function App() {
     setUniversityResult(null);
     setSelectedOption(null);
     setShowResult(false);
+    setShowCardSelection(false);
   };
 
   const formatPrize = (prize: number) => {
@@ -198,42 +217,26 @@ function App() {
             🎓 Universitários
           </button>
 
-          <div className="cards-help">
-            <span
-              className={`help-label ${gameState.cardsUsed ? "disabled" : ""}`}
-            >
-              🃏 Cartas:
-            </span>
-            <button
-              className={`help-btn card-btn ${
-                gameState.cardsUsed ? "disabled" : ""
-              }`}
-              onClick={() => handleCardsHelp(1)}
-              disabled={gameState.cardsUsed || showResult}
-            >
-              1
-            </button>
-            <button
-              className={`help-btn card-btn ${
-                gameState.cardsUsed ? "disabled" : ""
-              }`}
-              onClick={() => handleCardsHelp(2)}
-              disabled={gameState.cardsUsed || showResult}
-            >
-              2
-            </button>
-            <button
-              className={`help-btn card-btn ${
-                gameState.cardsUsed ? "disabled" : ""
-              }`}
-              onClick={() => handleCardsHelp(3)}
-              disabled={gameState.cardsUsed || showResult}
-            >
-              3
-            </button>
-          </div>
+          <button
+            className={`help-btn cards-btn ${
+              gameState.cardsUsed ? "disabled" : ""
+            }`}
+            onClick={handleCardsHelpClick}
+            disabled={gameState.cardsUsed || showResult}
+          >
+            🃏 Cartas
+          </button>
         </div>
       </main>
+
+      {/* Card Selection Modal */}
+      {showCardSelection && (
+        <CardSelection
+          onCardSelect={handleCardSelect}
+          onClose={handleCloseCardSelection}
+          disabled={showResult}
+        />
+      )}
     </div>
   );
 }

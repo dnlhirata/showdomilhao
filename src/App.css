@@ -104,10 +104,8 @@
   background: linear-gradient(45deg, #667eea, #764ba2);
 }
 
-.card-btn {
+.cards-btn {
   background: linear-gradient(45deg, #f093fb, #f5576c);
-  padding: 0.6rem 1rem;
-  min-width: 50px;
 }
 
 .help-btn.disabled {
@@ -116,20 +114,6 @@
   opacity: 0.5;
 }
 
-.cards-help {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.help-label {
-  font-weight: 600;
-  margin-right: 0.5rem;
-}
-
-.help-label.disabled {
-  opacity: 0.5;
-}
 
 /* University Help Result */
 .university-help-result {
