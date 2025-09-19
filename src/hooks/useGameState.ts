@@ -62,46 +62,37 @@ export const useGameState = () => {
       const isCorrect = optionIndex === gameState.currentQuestion.correct;
       const nextIndex = gameState.currentQuestionIndex + 1;
 
-      if (isCorrect) {
-        const newScore = gameState.score + 1; // Incrementa apenas quando acerta
-
-        // Verifica se ganhou o jogo (respondeu corretamente 10 perguntas)
-        if (newScore >= prizes.length) {
-          setGameState((prev) => ({
-            ...prev,
-            score: newScore,
-            gameOver: true,
-            won: true,
-            currentQuestion: null,
-          }));
-        } else {
-          // Próxima pergunta
-          setGameState((prev) => ({
-            ...prev,
-            currentQuestionIndex: nextIndex,
-            currentQuestion: questions[nextIndex],
-            score: newScore,
-            hiddenOptions: [], // Reset das opções escondidas
-          }));
-        }
-      } else {
+      // Check if this was the last question
+      if (nextIndex >= questions.length) {
+        // Game ends only when all questions are answered
         setGameState((prev) => ({
           ...prev,
-          gameOver: false,
-          won: false,
-          currentQuestion: questions[nextIndex],
-          currentQuestionIndex: nextIndex,
+          score: isCorrect ? prev.score + 1 : prev.score,
+          gameOver: true,
+          won: true, // Always win when completing all questions
+          currentQuestion: null,
         }));
-        setShowWrongAnswerCard(true);
+      } else {
+        // Continue to next question regardless of correct/incorrect
+        setGameState((prev) => ({
+          ...prev,
+          currentQuestionIndex: nextIndex,
+          currentQuestion: questions[nextIndex],
+          score: isCorrect ? prev.score + 1 : prev.score, // Only increment score on correct
+          hiddenOptions: [], // Reset das opções escondidas
+        }));
+
+        // Show wrong answer card if incorrect
+        if (!isCorrect) {
+          setShowWrongAnswerCard(true);
+        }
       }
     },
     [
       gameState.gameOver,
       gameState.currentQuestion,
       gameState.currentQuestionIndex,
-      gameState.score,
       questions,
-      prizes.length,
       setShowWrongAnswerCard,
     ]
   );
@@ -124,7 +115,7 @@ export const useGameState = () => {
       setGameState((prev) => ({
         ...prev,
         gameOver: true,
-        won: false,
+        won: true, // Always win when completing all questions
         currentQuestion: null,
       }));
     } else {

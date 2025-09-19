@@ -10,14 +10,12 @@ function App() {
   // Real game state from useGameState hook
   const {
     gameState,
-    questions,
     prizes,
     answerQuestion,
     skipQuestion,
     useUniversityHelp: triggerUniversityHelp,
     useCardsHelp: triggerCardsHelp,
     resetGame,
-    getCurrentPrize,
     showWrongAnswerCard,
     setShowWrongAnswerCard,
   } = useGameState();
@@ -129,13 +127,6 @@ function App() {
     setShowNoiaHelp(false);
   };
 
-  const formatPrize = (prize: number) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(prize);
-  };
-
   // Play correct answer sound
   const playCorrectAnswerSound = () => {
     try {
@@ -154,29 +145,31 @@ function App() {
     return <IntroSlideshow onComplete={handleIntroComplete} />;
   }
 
-  // Game Over Screen
-  // if (gameState.gameOver) {
-  //   return (
-  //     <div className="app">
-  //       <div className="game-over-screen">
-  //         <h1>
-  //           {gameState.won ? "🎉 PARABÉNS! VOCÊ GANHOU!" : "😢 GAME OVER"}
-  //         </h1>
-  //         <div className="final-score">
-  //           <h2>Pontuação Final: {gameState.score}/15</h2>
-  //           <h3>Prêmio: {formatPrize(getCurrentPrize())}</h3>
-  //           {gameState.won && (
-  //             <p>Você completou todas as perguntas e ganhou o prêmio máximo!</p>
-  //           )}
-  //           {!gameState.won && <p>Resposta incorreta! Tente novamente.</p>}
-  //         </div>
-  //         <button className="play-again-btn" onClick={handlePlayAgain}>
-  //           Jogar Novamente
-  //         </button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  // Victory Screen - Only shows when all questions are completed
+  if (gameState.gameOver && gameState.won) {
+    return (
+      <div className="app">
+        <div className="victory-screen">
+          <div className="congratulations-text">
+            <h1>PARABÉNS, Fritão!</h1>
+            <h2>DESEJAMOS TODA A FELICIDADE PARA VOCÊS!</h2>
+          </div>
+
+          <div className="celebration-image-container">
+            <img
+              src="/celebration.jpeg"
+              alt="Parabéns, Fritão"
+              className="celebration-photo"
+            />
+          </div>
+
+          <button className="play-again-btn" onClick={handlePlayAgain}>
+            Jogar Novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // Loading Screen (when no current question)
   if (!gameState.currentQuestion) {

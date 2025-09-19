@@ -208,8 +208,105 @@
   text-align: right;
 }
 
-/* Game Over Screen */
-.game-over-screen, .loading-screen {
+/* Victory Screen */
+.victory-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-height: 100vh;
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.congratulations-text {
+  margin-bottom: 1rem;
+  z-index: 10;
+  position: relative;
+  max-width: 90%;
+}
+
+.congratulations-text h1 {
+  font-size: 2.8rem;
+  margin: 0 0 1rem 0;
+  color: #ffd700;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+  font-weight: bold;
+  animation: celebrationGlow 2s ease-in-out infinite alternate;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+.congratulations-text h2 {
+  font-size: 1.6rem;
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes celebrationGlow {
+  from {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  }
+  to {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+}
+
+.celebration-image-container {
+  margin: 0.5rem 0 1rem 0;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  border: 3px solid #ffd700;
+  display: inline-block;
+}
+
+.celebration-photo {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.final-stats {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 1rem 0 2rem 0;
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.final-stats h3 {
+  color: #ffd700;
+  margin: 0 0 1rem 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.final-stats p {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Loading Screen */
+.loading-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -245,20 +342,24 @@
 
 .play-again-btn {
   background: linear-gradient(45deg, #667eea, #764ba2);
-  border: none;
+  border: 3px solid #ffd700;
   color: white;
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
   border-radius: 30px;
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
 }
 
 .play-again-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(45deg, #764ba2, #667eea);
 }
 
 .loading-screen h1 {
@@ -392,6 +493,50 @@
     padding: 1.5rem;
   }
   
+  .victory-screen {
+    padding: 0.5rem;
+    height: 100vh;
+    justify-content: space-around;
+  }
+  
+  .congratulations-text {
+    margin-bottom: 0.5rem;
+  }
+  
+  .congratulations-text h1 {
+    font-size: 2.2rem;
+    letter-spacing: 0.5px;
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+  }
+  
+  .congratulations-text h2 {
+    font-size: 1.3rem;
+    letter-spacing: 0.3px;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.1;
+  }
+  
+  .celebration-photo {
+    max-width: 200px;
+  }
+  
+  .celebration-image-container {
+    margin: 0.3rem 0;
+  }
+  
+  .final-stats {
+    padding: 1.5rem;
+  }
+  
+  .final-stats h3 {
+    font-size: 1.5rem;
+  }
+  
+  .final-stats p {
+    font-size: 1rem;
+  }
+  
   .noia-help-content {
     padding: 1.5rem;
   }
@@ -419,6 +564,44 @@
   .score-info {
     flex-direction: column;
     gap: 0.5rem;
+  }
+  
+  .victory-screen {
+    padding: 0.3rem;
+    height: 100vh;
+    justify-content: space-evenly;
+  }
+  
+  .congratulations-text {
+    margin-bottom: 0.3rem;
+  }
+  
+  .congratulations-text h1 {
+    font-size: 1.6rem;
+    letter-spacing: 0.3px;
+    margin: 0 0 0.3rem 0;
+    line-height: 0.9;
+  }
+  
+  .congratulations-text h2 {
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+    line-height: 1;
+    margin: 0 0 0.3rem 0;
+  }
+  
+  .celebration-photo {
+    max-width: 150px;
+  }
+  
+  .celebration-image-container {
+    margin: 0.2rem 0;
+  }
+  
+  .play-again-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
   }
   
   .help-buttons {
