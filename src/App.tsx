@@ -1,76 +1,70 @@
 import { useState } from "react";
 import "./App.css";
-
+import { PrizeTracker } from "./components/PrizeTracker";
 import QuestionCard from "./components/QuestionCard";
-import type { Question, UniversityHelpResult } from "./types";
+import { useGameState } from "./hooks/useGameState";
+import type { UniversityHelpResult } from "./types";
 
 function App() {
-  // Mock game state - no real logic, just UI state
-  const [currentView, setCurrentView] = useState<
-    "game" | "gameOver" | "loading"
-  >("game");
+  // Real game state from useGameState hook
+  const {
+    gameState,
+    prizes,
+    answerQuestion,
+    skipQuestion,
+    useUniversityHelp: triggerUniversityHelp,
+    useCardsHelp: triggerCardsHelp,
+    resetGame,
+    getCurrentPrize,
+    getNextPrize,
+  } = useGameState();
+
+  // UI state for answer feedback and university help display
   const [universityResult, setUniversityResult] =
     useState<UniversityHelpResult | null>(null);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
 
-  // Mock game data
-  const mockQuestion: Question = {
-    id: 1,
-    question: "Qual é a capital do Brasil?",
-    options: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
-    correct: 2,
-    level: "easy",
-  };
-
-  const mockGameState = {
-    currentQuestionIndex: 0,
-    score: 0,
-    skipsLeft: 3,
-    universitiesUsed: false,
-    cardsUsed: false,
-    gameOver: false,
-    won: false,
-    hiddenOptions: [] as number[],
-  };
-
-  // Mock methods - no real functionality, just UI feedback
+  // Handle answer selection with visual feedback
   const handleAnswer = (optionIndex: number) => {
-    console.log(`Mock: Selected option ${optionIndex}`);
+    if (gameState.gameOver || showResult) return;
+
     setSelectedOption(optionIndex);
     setShowResult(true);
 
-    // Mock delay to show result
+    // Show result for 2 seconds before progressing
     setTimeout(() => {
+      answerQuestion(optionIndex);
       setSelectedOption(null);
       setShowResult(false);
       setUniversityResult(null);
     }, 2000);
   };
 
+  // Handle skip with UI cleanup
   const handleSkip = () => {
-    console.log("Mock: Skip question");
+    skipQuestion();
     setUniversityResult(null);
     setSelectedOption(null);
     setShowResult(false);
   };
 
+  // Handle university help
   const handleUniversityHelp = () => {
-    console.log("Mock: University help");
-    // Mock university result
-    const mockResult: UniversityHelpResult = {
-      percentages: [15, 25, 45, 15], // Mock percentages favoring option C
-    };
-    setUniversityResult(mockResult);
+    const result = triggerUniversityHelp();
+    if (result) {
+      setUniversityResult(result);
+    }
   };
 
+  // Handle cards help
   const handleCardsHelp = (cardValue: 1 | 2 | 3) => {
-    console.log(`Mock: Cards help - eliminate ${cardValue} options`);
+    triggerCardsHelp(cardValue);
   };
 
+  // Handle play again with UI cleanup
   const handlePlayAgain = () => {
-    console.log("Mock: Play again");
-    setCurrentView("game");
+    resetGame();
     setUniversityResult(null);
     setSelectedOption(null);
     setShowResult(false);
@@ -83,49 +77,37 @@ function App() {
     }).format(prize);
   };
 
-  // Mock prizes
-  const getCurrentPrize = () => 1000;
-  const getNextPrize = () => 2000;
-
-  // Game Over Screen (Mock)
-  if (currentView === "gameOver") {
+  // Game Over Screen
+  if (gameState.gameOver) {
     return (
       <div className="app">
         <div className="game-over-screen">
-          <h1>🎉 PARABÉNS! VOCÊ GANHOU!</h1>
+          <h1>
+            {gameState.won ? "🎉 PARABÉNS! VOCÊ GANHOU!" : "😢 GAME OVER"}
+          </h1>
           <div className="final-score">
-            <h2>Pontuação Final: 5/15</h2>
-            <h3>Prêmio: {formatPrize(5000)}</h3>
+            <h2>Pontuação Final: {gameState.score}/15</h2>
+            <h3>Prêmio: {formatPrize(getCurrentPrize())}</h3>
+            {gameState.won && (
+              <p>Você completou todas as perguntas e ganhou o prêmio máximo!</p>
+            )}
+            {!gameState.won && <p>Resposta incorreta! Tente novamente.</p>}
           </div>
           <button className="play-again-btn" onClick={handlePlayAgain}>
             Jogar Novamente
-          </button>
-          <button
-            className="demo-btn"
-            onClick={() => setCurrentView("game")}
-            style={{ marginTop: "1rem", background: "#666" }}
-          >
-            Voltar para Demo
           </button>
         </div>
       </div>
     );
   }
 
-  // Loading Screen (Mock)
-  if (currentView === "loading") {
+  // Loading Screen (when no current question)
+  if (!gameState.currentQuestion) {
     return (
       <div className="app">
         <div className="loading-screen">
           <h1>Show do Milhão</h1>
           <p>Carregando perguntas...</p>
-          <button
-            className="demo-btn"
-            onClick={() => setCurrentView("game")}
-            style={{ marginTop: "2rem" }}
-          >
-            Ir para Demo
-          </button>
         </div>
       </div>
     );
@@ -138,7 +120,7 @@ function App() {
         <h1>Show do Milhão</h1>
         <div className="game-info">
           <div className="score-info">
-            <span>Pergunta: {mockGameState.currentQuestionIndex + 1}/15</span>
+            <span>Pergunta: {gameState.currentQuestionIndex + 1}/15</span>
             <span>Prêmio Atual: {formatPrize(getCurrentPrize())}</span>
             <span>Próximo Prêmio: {formatPrize(getNextPrize())}</span>
           </div>
@@ -146,15 +128,30 @@ function App() {
       </header>
 
       <main className="game-main">
-        <QuestionCard
-          question={mockQuestion}
-          onAnswer={handleAnswer}
-          hiddenOptions={mockGameState.hiddenOptions}
-          disabled={showResult}
-          selectedOption={selectedOption || undefined}
-          showResult={showResult}
-          isCorrect={selectedOption === mockQuestion.correct}
-        />
+        <div className="game-layout">
+          {/* Prize Tracker */}
+          <aside className="prize-sidebar">
+            <PrizeTracker
+              prizes={prizes}
+              currentScore={gameState.score}
+              gameOver={gameState.gameOver}
+              won={gameState.won}
+            />
+          </aside>
+
+          {/* Question Area */}
+          <div className="question-area">
+            <QuestionCard
+              question={gameState.currentQuestion}
+              onAnswer={handleAnswer}
+              hiddenOptions={gameState.hiddenOptions}
+              disabled={showResult}
+              selectedOption={selectedOption || undefined}
+              showResult={showResult}
+              isCorrect={selectedOption === gameState.currentQuestion.correct}
+            />
+          </div>
+        </div>
 
         {/* Resultado da Ajuda dos Universitários */}
         {universityResult && (
@@ -183,75 +180,56 @@ function App() {
         <div className="help-buttons">
           <button
             className={`help-btn skip-btn ${
-              mockGameState.skipsLeft === 0 ? "disabled" : ""
+              gameState.skipsLeft === 0 ? "disabled" : ""
             }`}
             onClick={handleSkip}
-            disabled={mockGameState.skipsLeft === 0 || showResult}
+            disabled={gameState.skipsLeft === 0 || showResult}
           >
-            ⏭️ Pular ({mockGameState.skipsLeft})
+            ⏭️ Pular ({gameState.skipsLeft})
           </button>
 
           <button
             className={`help-btn university-btn ${
-              mockGameState.universitiesUsed ? "disabled" : ""
+              gameState.universitiesUsed ? "disabled" : ""
             }`}
             onClick={handleUniversityHelp}
-            disabled={mockGameState.universitiesUsed || showResult}
+            disabled={gameState.universitiesUsed || showResult}
           >
             🎓 Universitários
           </button>
 
           <div className="cards-help">
             <span
-              className={`help-label ${
-                mockGameState.cardsUsed ? "disabled" : ""
-              }`}
+              className={`help-label ${gameState.cardsUsed ? "disabled" : ""}`}
             >
               🃏 Cartas:
             </span>
             <button
               className={`help-btn card-btn ${
-                mockGameState.cardsUsed ? "disabled" : ""
+                gameState.cardsUsed ? "disabled" : ""
               }`}
               onClick={() => handleCardsHelp(1)}
-              disabled={mockGameState.cardsUsed || showResult}
+              disabled={gameState.cardsUsed || showResult}
             >
               1
             </button>
             <button
               className={`help-btn card-btn ${
-                mockGameState.cardsUsed ? "disabled" : ""
+                gameState.cardsUsed ? "disabled" : ""
               }`}
               onClick={() => handleCardsHelp(2)}
-              disabled={mockGameState.cardsUsed || showResult}
+              disabled={gameState.cardsUsed || showResult}
             >
               2
             </button>
             <button
               className={`help-btn card-btn ${
-                mockGameState.cardsUsed ? "disabled" : ""
+                gameState.cardsUsed ? "disabled" : ""
               }`}
               onClick={() => handleCardsHelp(3)}
-              disabled={mockGameState.cardsUsed || showResult}
+              disabled={gameState.cardsUsed || showResult}
             >
               3
-            </button>
-          </div>
-        </div>
-
-        {/* Demo Controls */}
-        <div className="demo-controls">
-          <h4>🎮 Demo Controls:</h4>
-          <div className="demo-buttons">
-            <button onClick={() => setCurrentView("loading")}>
-              Loading Screen
-            </button>
-            <button onClick={() => setCurrentView("gameOver")}>
-              Game Over Screen
-            </button>
-            <button onClick={handleUniversityHelp}>Show University Help</button>
-            <button onClick={() => setUniversityResult(null)}>
-              Hide University Help
             </button>
           </div>
         </div>
