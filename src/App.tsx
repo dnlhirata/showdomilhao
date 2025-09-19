@@ -4,7 +4,6 @@ import CardSelection from "./components/CardSelection";
 import { PrizeTracker } from "./components/PrizeTracker";
 import QuestionCard from "./components/QuestionCard";
 import { useGameState } from "./hooks/useGameState";
-import type { UniversityHelpResult } from "./types";
 
 function App() {
   // Real game state from useGameState hook
@@ -22,8 +21,6 @@ function App() {
   // UI state for answer feedback and help displays
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [universityResult, setUniversityResult] =
-    useState<UniversityHelpResult | null>(null);
   const [showCardSelection, setShowCardSelection] = useState(false);
   const [showNoiaHelp, setShowNoiaHelp] = useState(false);
 
@@ -39,7 +36,6 @@ function App() {
       answerQuestion(optionIndex);
       setSelectedOption(null);
       setShowResult(false);
-      setUniversityResult(null);
     }, 2000);
   };
 
@@ -48,15 +44,14 @@ function App() {
     skipQuestion();
     setSelectedOption(null);
     setShowResult(false);
-    setUniversityResult(null);
   };
 
   // Handle university help - shows percentage bars
   const handleUniversityHelp = () => {
-    const result = triggerUniversityHelp();
-    if (result) {
-      setUniversityResult(result);
-    }
+    if (gameState.universitiesUsed) return;
+    setShowNoiaHelp(true);
+    // Mark as used in the game state
+    triggerUniversityHelp();
   };
 
   // Handle closing nóia help modal
@@ -90,7 +85,6 @@ function App() {
     resetGame();
     setSelectedOption(null);
     setShowResult(false);
-    setUniversityResult(null);
     setShowCardSelection(false);
     setShowNoiaHelp(false);
   };
@@ -172,29 +166,6 @@ function App() {
           won={gameState.won}
         />
 
-        {/* Resultado da Ajuda dos Universitários */}
-        {universityResult && (
-          <div className="university-help-result">
-            <h3>📊 Opinião dos Universitários:</h3>
-            <div className="university-percentages">
-              {universityResult.percentages.map((percentage, index) => (
-                <div key={index} className="percentage-bar">
-                  <span className="option-label">
-                    {String.fromCharCode(65 + index)}
-                  </span>
-                  <div className="bar-container">
-                    <div
-                      className="bar-fill"
-                      style={{ width: `${percentage}%` }}
-                    ></div>
-                  </div>
-                  <span className="percentage-value">{percentage}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Botões de Ajuda */}
         <div className="help-buttons">
           <button
@@ -214,7 +185,7 @@ function App() {
             onClick={handleUniversityHelp}
             disabled={gameState.universitiesUsed || showResult}
           >
-            🎓 Universitários
+            Ajuda dos nóia
           </button>
 
           <button
