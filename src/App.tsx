@@ -165,9 +165,14 @@ function App() {
               onAnswer={handleAnswer}
               hiddenOptions={gameState.hiddenOptions}
               disabled={showResult}
-              selectedOption={selectedOption || undefined}
+              selectedOption={
+                selectedOption !== null ? selectedOption : undefined
+              }
               showResult={showResult}
-              isCorrect={selectedOption === gameState.currentQuestion.correct}
+              isCorrect={
+                selectedOption !== null &&
+                selectedOption === gameState.currentQuestion.correct
+              }
             />
           </div>
         </div>
