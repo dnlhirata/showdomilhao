@@ -19,7 +19,7 @@
   - **Depende de**: T3 (tipos)
 - [ ] **T5** - Componente principal App.tsx
   - **Depende de**: T1 (setup), T3 (tipos)
-- [ ] **T6** - Componente QuestionCard (pergunta + 4 alternativas)
+- [x] **T6** - Componente QuestionCard (pergunta + 4 alternativas)
   - **Depende de**: T3 (tipos)
 
 ### 🎯 **FASE 3 - Funcionalidades (Dependências: T4, T5, T6)**
