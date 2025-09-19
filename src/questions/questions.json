@@ -4,49 +4,49 @@
       "id": 1,
       "question": "Qual o apelido carinhoso que você chama a noiva?",
       "options": ["Amor", "Xuxu", "Chico Trevas", "Coração"],
-      "correct": 2,
+      "correct": 1,
       "level": "easy"
     },
     {
       "id": 2,
       "question": "Qual é o restaurante favorito de vocês?",
       "options": ["Ze", "Marques", "Oliver Garden", "Yucatan"],
-      "correct": 4,
+      "correct": 3,
       "level": "easy"
     },
     {
       "id": 3,
       "question": "Onde foi o primeiro beijo?",
       "options": ["Estacionamento do shopping", "Cinema", "Praça de Alimentação", "Festa"],
-      "correct": 1,
+      "correct": 0,
       "level": "easy"
     },
     {
       "id": 4,
       "question": "Qual o maior sonho da vida da noiva?",
       "options": ["Aposentar cedo", "Viver feliz ao lado do Stefano", "Mundial do Palmeiras", "Ter família grande"],
-      "correct": 1,
+      "correct": 3,
       "level": "easy"
     },
     {
       "id": 5,
       "question": "Quantos filhos a noiva quer ter?",
       "options": ["2", "3", "4", "Nenhum"],
-      "correct": 3,
+      "correct": 2,
       "level": "easy"
     },
     {
       "id": 6,
       "question": "Qual é a música do casal?",
       "options": ["Best part", "Hino do Palmeiras", "Colors and light", "O girassol"],
-      "correct": 3,
+      "correct": 2,
       "level": "medium"
     },
     {
       "id": 7,
       "question": "Qual o maior sonho de consumo da noiva?",
       "options": ["Coroa Cross", "Viagem aurora boreal", "Apto grande", "Ménage com Abel Ferreira"],
-      "correct": 1,
+      "correct": 2,
       "level": "medium"
     },
     {
@@ -60,91 +60,91 @@
       "id": 9,
       "question": "Qual a cor favorita da noiva?",
       "options": ["Azul", "Verde", "Violeta", "Rosa"],
-      "correct": 1,
+      "correct": 0,
       "level": "medium"
     },
     {
       "id": 10,
       "question": "Qual é a melhor qualidade da noiva?",
       "options": ["Sagacidade", "Inteligência", "Resiliência", "Honestidade"],
-      "correct": 2,
+      "correct": 1,
       "level": "medium"
     },
     {
       "id": 11,
       "question": "O que você acha mais atraente na noiva?",
       "options": ["Peito", "Bunda", "Caráter", "Rosto"],
-      "correct": 2,
+      "correct": 1,
       "level": "hard"
     },
     {
       "id": 12,
       "question": "Qual a comida favorita da noiva?",
       "options": ["Feijoada", "Lasanha", "Strogonoff", "Hambuguer"],
-      "correct": 3,
+      "correct": 2,
       "level": "hard"
     },
     {
       "id": 13,
       "question": "Qual a maior surpresa que a noiva recebeu de você?",
       "options": ["Pedido de casamento", "Se declarar palmeirense", "Ingresso do primeiro tomorrowland", "Colocar o sobrenome"],
-      "correct": 1,
+      "correct": 0,
       "level": "hard"
     },
     {
       "id": 14,
       "question": "O que você não gosta de fazer, mas faz por amor a noiva?",
       "options": ["Limpeza de pele", "Ver Diva Depressao", "Ir no mercado de sexta feira", "Fio terra"],
-      "correct": 1,
+      "correct": 0,
       "level": "hard"
     },
     {
       "id": 15,
       "question": "Qual a mania mais irritante da noiva?",
       "options": ["Deixar bebida no copo", "Dar susto", "Encher o calendário", "Nao ser palmeirense"],
-      "correct": 1,
+      "correct": 0,
       "level": "hard"
     },
     {
       "id": 16,
       "question": "Qual a bebida favorita da noiva?",
       "options": ["Agua", "Chazinho", "Coquinha", "Vinho"],
-      "correct": 1,
+      "correct": 0,
       "level": "hard"
     },
     {
       "id": 17,
       "question": "Qual comida a noiva mais odeia?",
       "options": ["Pizza", "Bacon", "Trufa", "Sopa"],
-      "correct": 3,
+      "correct": 2,
       "level": "medium"
     },
     {
       "id": 18,
       "question": "O que fizeram no primeiro dia dos namorados juntos?",
       "options": ["Restaurante de fondue", "Cinema", "Casa um do outro", "Jogo do palmeiras"],
-      "correct": 1,
+      "correct": 0,
       "level": "medium"
     },
     {
       "id": 19,
       "question": "O que você mais gosta na personalidade da noiva?",
       "options": ["Perseverança", "Benevolência", "Braveza", "Empatia"],
-      "correct": 3,
+      "correct": 2,
       "level": "medium"
     },
     {
       "id": 20,
-      "question": "Qual primeira viagem que fizeram juntos?",
+      "question": "Qual a primeira viagem que fizeram juntos?",
       "options": ["Ubatuba", "Ilhabela", "Atibaia", "Curitiba"],
-      "correct": 3,
+      "correct": 2,
       "level": "easy"
     },
     {
       "id": 21,
       "question": "Qual viagem vocês sonham em fazer juntos?",
       "options": ["África do Sul", "Cruzeiro do Neymar", "Japao", "Disney"],
-      "correct": 3,
+      "correct": 2,
       "level": "medium"
     },
     {
@@ -155,5 +155,5 @@
       "level": "medium"
     }
   ],
-  "prizes": [1000, 2000, 5000, 10000, 20000, 50000, 100000, 300000, 500000, 1000000]
+  "prizes": ["Manda 1 Beber", 2000, 5000, 10000, 20000, 50000, 100000, 300000, 500000, 1000000]
 }

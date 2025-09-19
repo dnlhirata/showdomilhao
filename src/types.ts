@@ -49,7 +49,7 @@ export type CardValue = 1 | 2 | 3;
  */
 export interface QuestionsData {
   questions: Question[];
-  prizes: number[];
+  prizes: string[];
 }
 
 /**
