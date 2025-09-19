@@ -23,7 +23,7 @@
   - **Depende de**: T3 (tipos)
 
 ### 🎯 **FASE 3 - Funcionalidades (Dependências: T4, T5, T6)**
-- [ ] **T7** - Lógica de validação de respostas
+- [x] **T7** - Lógica de validação de respostas ✅
   - **Depende de**: T4 (hook), T2 (questions.json)
 - [ ] **T8** - Componente PrizeTracker (escada de prêmios)
   - **Depende de**: T3 (tipos)
@@ -189,6 +189,7 @@ Marcar como feito conforme completam:
 - [x] T2 - questions.json (35 perguntas organizadas por nível) ✅
 - [x] T3 - Tipos TypeScript (interfaces completas) ✅
 - [x] T4 - Hook useGameState (lógica completa do jogo) ✅
+- [x] T7 - Lógica de validação de respostas (utilitários completos) ✅
 
 ---
 
